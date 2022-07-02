@@ -17,6 +17,7 @@ class CommandShapeDetection(CommandAbstract):
     def _get_method(self, name):
         switcher = {
             CommandEnum.SHAPE_DETECTION: ShapeDetection.hu_moment,
+            CommandEnum.DRAW_CONTOURS: ''
         }
 
         return switcher.get(name)

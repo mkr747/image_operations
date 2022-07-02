@@ -1,11 +1,13 @@
 from app.services.commands.command_invoker import CommandInvoker
 from app.services.image_service import ImageService
+from app.services.image_update_service import ImageUpdateService
 
 
 class AlgorithmRunner:
-    def __init__(self, invoker: CommandInvoker, image_service: ImageService):
+    def __init__(self, invoker: CommandInvoker, image_service: ImageService, image_update: ImageUpdateService):
         self.__invoker = invoker
         self.__image_service = image_service
+        self.__image_update = image_update
 
     def run(self):
         while video.isOpened():

@@ -8,6 +8,7 @@ class CommandEnum(Enum):
     CLOSING = "Closing",
     GRADIENT = "Gradient",
     SHAPE_DETECTION = "Shape detection",
+    DRAW_CONTOURS = "Draw contours",
     THRESHOLDING = "Thresholding",
     CHANGE_COLOR_SPACE = "Transfrom color space",
     AI = "AI"
