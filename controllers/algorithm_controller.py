@@ -3,8 +3,6 @@ from uuid import UUID
 from app.models.enums.command_enum import CommandEnum
 from app.models.params_metadata import ParamsMetadata
 from app.services.algorithm_service import AlgorithmService
-from app.services.commands.command import Command
-from app.services.factories.command_factory import CommandFactory
 from app.view.algorithm_view import AlgorithmView
 
 
