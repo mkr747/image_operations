@@ -1,5 +1,5 @@
 from app.models.enums.command_enum import CommandEnum
-from app.services.image_processing.shape_detection import ShapeDetection
+from app.services.steps.shape_detection import ShapeDetection
 from command import CommandAbstract
 
 

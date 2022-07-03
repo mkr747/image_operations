@@ -1,6 +1,6 @@
 from app.controllers.algorithm_controller import AlgorithmController
 from app.models.enums.command_enum import CommandEnum
-from app.tools.gui_builder import GUIBuilder as gb
+from app.factories.gui_factory import GuiFactory as gb
 
 
 class ComponentView:

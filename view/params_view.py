@@ -3,9 +3,8 @@ import string
 from uuid import UUID
 
 from app.controllers.algorithm_controller import AlgorithmController
-from app.controllers.params_controller import ParamsController
 from app.models.params_metadata import ParamsMetadata
-from app.tools.gui_builder import GUIBuilder as gb
+from app.factories.gui_factory import GuiFactory as gb
 
 
 class ParamsView:

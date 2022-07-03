@@ -1,6 +1,6 @@
 from PIL import ImageTk
 
-from app.tools.gui_builder import GUIBuilder as gb
+from app.factories.gui_factory import GuiFactory as gb
 
 
 class ImageView:

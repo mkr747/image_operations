@@ -1,5 +1,5 @@
 from app.models.enums.command_enum import CommandEnum
-from app.services.image_processing.thresholding import Thresholding
+from app.services.steps.thresholding import Thresholding
 from command import Command
 
 

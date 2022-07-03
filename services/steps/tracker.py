@@ -2,8 +2,7 @@ from matplotlib.patches import Polygon
 
 
 class TrackingService:
-    def __init__(self, tracker_type, coverage_threshold):
-        self.tracker_type = tracker_type
+    def __init__(self, coverage_threshold):
         self.coverage_threshold = coverage_threshold
         self.trackers = []
         self.curr_results = []
@@ -18,7 +17,7 @@ class TrackingService:
         self.trackers.append(tracker)
 
     def update_trackers(self, frame):
-        self.curr_results = [t.update(frame) for t in self.trackers]
+        self.curr_results = [t.update(frame) for t in self.trackers if self.is_frame_already_tracked(frame)]
 
     def is_frame_already_tracked(self, bbox_frame):
         coverage = [self.__calculate_iou(bbox, bbox_frame)

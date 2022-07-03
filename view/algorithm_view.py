@@ -3,7 +3,7 @@ from uuid import UUID
 
 from app.controllers.params_controller import ParamsController
 from app.services.commands.command import Command
-from app.tools.gui_builder import GUIBuilder as gb
+from app.factories.gui_factory import GUIBuilder as gb
 
 
 class AlgorithmView:

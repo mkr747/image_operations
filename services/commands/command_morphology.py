@@ -1,8 +1,8 @@
 
 from app.models.enums.command_enum import CommandEnum
-from app.services.image_processing.morphology import Morphology
-from app.services.image_processing.shape_detection import ShapeDetection
-from app.services.image_processing.thresholding import Thresholding
+from app.services.steps.morphology import Morphology
+from app.services.steps.shape_detection import ShapeDetection
+from app.services.steps.thresholding import Thresholding
 from command import CommandAbstract
 
 

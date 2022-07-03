@@ -2,7 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 
-class GUIBuilder:
+class GuiFactory:
     @staticmethod
     def create_frame(frame, width, height):
         return ttk.Frame(master=frame, width=width, height=height)

@@ -3,7 +3,7 @@ from uuid import UUID
 from app.models.enums.command_enum import CommandEnum
 from app.services.commands.command import Command
 from app.services.commands.command_invoker import CommandInvoker
-from app.services.factories.command_factory import CommandFactory
+from app.factories.command_factory import CommandFactory
 
 
 class AlgorithmService:
