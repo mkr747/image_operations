@@ -2,9 +2,9 @@ from ast import Dict
 import string
 from uuid import UUID
 
-from app.controllers.algorithm_controller import AlgorithmController
-from app.models.params_metadata import ParamsMetadata
-from app.factories.gui_factory import GuiFactory as gb
+from controllers.algorithm_controller import AlgorithmController
+from models.params_metadata import ParamsMetadata
+from factories.gui_factory import GuiFactory as gb
 
 
 class ParamsView:
@@ -14,22 +14,24 @@ class ParamsView:
         self.__name: str
         self.__labels = []
         self.__values = []
-        self.__params = Dict[str, ParamsMetadata]
+        self.__params = dict[str, ParamsMetadata]
 
     def create(self, window, width=300, height=900):
-        self.frame = gb.create_frame(window, width, height)
+        self.__frame = gb.create_frame(window, width, height)
 
-    def set_params(self, name: string, uuid: UUID, params: Dict[str, ParamsMetadata]):
+        return self.__frame
+
+    def set_params(self, name: string, uuid: UUID, params: dict[str, ParamsMetadata]):
         self.__params = params
         self.__name = name
         self.__uuid = uuid
         self.__clear()
         for i, key in enumerate(params.keys()):
-            self.__labels.append(gb.create_label(self.frame, key, i, 0))
+            self.__labels.append(gb.create_label(self.__frame, key, i, 0))
             if(params[key].is_readonly):
-                self.__values.append(gb.create_label(self.frame, key, i, 0))
+                self.__values.append(gb.create_label(self.__frame, key, i, 0))
             else:
-                self.__values.append(gb.create_entry(self.frame, i, 0))
+                self.__values.append(gb.create_entry(self.__frame, i, 0))
 
     def confirm_params(self):
         for i, key in enumerate(self.__params):

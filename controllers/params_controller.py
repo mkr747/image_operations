@@ -1,6 +1,5 @@
-from app.controllers.algorithm_controller import AlgorithmController
-from app.services.algorithm_service import AlgorithmService
-from app.view.params_view import ParamsView
+from services.algorithm_service import AlgorithmService
+from view.params_view import ParamsView
 
 
 class ParamsController:

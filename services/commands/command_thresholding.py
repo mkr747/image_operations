@@ -1,6 +1,6 @@
-from app.models.enums.command_enum import CommandEnum
-from app.services.steps.thresholding import Thresholding
-from command import Command
+from models.enums.command_enum import CommandEnum
+from services.steps.thresholding import Thresholding
+from .command import Command
 
 
 class CommandThresholding(Command):

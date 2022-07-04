@@ -1,15 +1,15 @@
 from uuid import UUID
 
-from app.models.enums.command_enum import CommandEnum
-from app.services.commands.command import Command
-from app.services.commands.command_invoker import CommandInvoker
-from app.factories.command_factory import CommandFactory
+from models.enums.command_enum import CommandEnum
+from services.commands.command import Command
+from services.commands.command_invoker import CommandInvoker
+from factories.command_factory import CommandFactory
 
 
 class AlgorithmService:
     def __init__(self, invoker: CommandInvoker):
         self.__invoker = invoker
-        self.__command_factory = CommandFactory
+        self.__command_factory = CommandFactory()
 
     def get_step(self, uuid):
         return self.__invoker.get_command(uuid)
@@ -24,7 +24,7 @@ class AlgorithmService:
         self.__invoker.clear_commands()
 
     def add(self, cmd: CommandEnum) -> Command:
-        implementation = self.__command_factory(cmd)
+        implementation = self.__command_factory.get_command(cmd)
         self.__invoker.add_command(cmd)
 
         return implementation

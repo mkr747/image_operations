@@ -1,7 +1,7 @@
 from datetime import date
 import logging
 
-from app.tools.time_measurement import TimeMeasure
+from tools.time_measurement import TimeMeasure
 
 
 class Logger:

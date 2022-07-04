@@ -1,9 +1,9 @@
 from ast import Dict
 from uuid import UUID
-from app.models.enums.command_enum import CommandEnum
-from app.models.params_metadata import ParamsMetadata
-from app.services.algorithm_service import AlgorithmService
-from app.view.algorithm_view import AlgorithmView
+from models.enums.command_enum import CommandEnum
+from models.params_metadata import ParamsMetadata
+from services.algorithm_service import AlgorithmService
+from view.algorithm_view import AlgorithmView
 
 
 class AlgorithmController:
@@ -28,5 +28,5 @@ class AlgorithmController:
     def save_algorithm(self):
         self.__algorithmService.save()
 
-    def set_params(self, uuid: UUID, params: Dict[str, ParamsMetadata]):
+    def set_params(self, uuid: UUID, params: dict[str, ParamsMetadata]):
         self.__algorithmService.set_params(uuid, params)

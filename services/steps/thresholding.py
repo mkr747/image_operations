@@ -1,6 +1,6 @@
 from typing import Sequence
 import numpy as np
-from app.models.threshold import Threshold
+from models.threshold import Threshold
 import cv2
 
 

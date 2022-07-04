@@ -1,9 +1,9 @@
-from app.models.enums.command_enum import CommandEnum
-from app.services.steps.shape_detection import ShapeDetection
-from command import CommandAbstract
+from models.enums.command_enum import CommandEnum
+from services.steps.shape_detection import ShapeDetection
+from .command import Command
 
 
-class CommandShapeDetection(CommandAbstract):
+class CommandShapeDetection(Command):
     def __init__(self, command: CommandEnum):
         super().__init__(command)
         self.command = self._get_method(command)

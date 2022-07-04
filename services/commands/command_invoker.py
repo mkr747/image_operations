@@ -1,15 +1,13 @@
 from ast import Dict
 from uuid import UUID
-from app.models.params_metadata import ParamsMetadata
-from command import Command
+from models.params_metadata import ParamsMetadata
+from .command import Command
 import pickle
 
 
 class CommandInvoker:
-    __commands: list(Command)
-
     def __init__(self):
-        self.__commands = list(Command)
+        self.__commands = list()
 
     def add_command(self, command: Command):
         self.__commands.append(command)
@@ -25,7 +23,7 @@ class CommandInvoker:
         with open(path, 'rb') as input:
             self.__commands = pickle.load(input)
 
-    def set_command_params(self, uuid: UUID, params: Dict[str, ParamsMetadata]):
+    def set_command_params(self, uuid: UUID, params: dict[str, ParamsMetadata]):
         id = self.__commands.index(lambda step: step.uuid == uuid)
         self.__commands[id].set_params(params)
 
