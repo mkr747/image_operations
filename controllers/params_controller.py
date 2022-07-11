@@ -1,14 +1,14 @@
-from services.algorithm_service import AlgorithmService
-from view.params_view import ParamsView
+from uuid import UUID
+from models.params_metadata import ParamsMetadata
+from services.params_service import ParamsService
 
 
 class ParamsController:
-    def __init__(self, algorithmService: AlgorithmService, paramsView: ParamsView):
-        self.__algorithmService = algorithmService
-        self.__paramsView = paramsView
+    def __init__(self, paramsService: ParamsService):
+        self.__paramsService = paramsService
 
-    def set_params(self, uuid, params: dict):
-        self.__algorithmService.set_params(uuid, params)
+    def set_params(self, uuid: UUID, params: dict[str, ParamsMetadata]):
+        self.__paramsService.set_params(uuid, params)
 
-    def feed_params(self, uuid) -> None:
-        self.__paramsView.set_params(self.__algorithmService.get_params(uuid))
+    def get_params(self, uuid: UUID):
+        return self.__paramsService.get_params(uuid)

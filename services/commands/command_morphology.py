@@ -10,6 +10,7 @@ class CommandMorphology(Command):
     def __init__(self, command: CommandEnum):
         super().__init__(command)
         self.command = self._get_method(command)
+        self.params = dict.fromkeys(['kernel'])
 
     def execute(self, frame):
         if type(frame) is list:

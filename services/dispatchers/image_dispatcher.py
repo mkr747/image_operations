@@ -5,7 +5,7 @@ from services.dispatchers.frame_dispatcher import FrameDispatcher
 
 class ImageDispatcher(FrameDispatcher):
     def __init__(self, path: str, resolution: Resolution):
-        super.__init__()
+        super().__init__()
         self.__image = cv2.resize(cv2.imread(path, cv2.IMREAD_ANYCOLOR), (
             resolution.width, resolution.height), interpolation=cv2.INTER_AREA)
         self.__fps = 1

@@ -8,6 +8,7 @@ class CommandAI(Command):
         super().__init__(command)
         self.ai_service = AI()
         self.command = self._get_method(command)
+        self.params = dict.fromkeys(['path', 'labels_path', 'columns'])
 
     def execute(self, frame):
         return self.command(frame, self.kernel)

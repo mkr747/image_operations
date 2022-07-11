@@ -1,4 +1,5 @@
 import tkinter as tk
+from services.params_service import ParamsService
 
 from services.commands.command_invoker import CommandInvoker
 from models.resolution import Resolution
@@ -26,16 +27,17 @@ def setup():
         invoker=commandInvoker, image_service=imageService)
     runnerController = RunnerController(algorithmRunner=algorithmRunner)
 
-    paramsController = ParamsController(
-        algorithmService=algorithmService)
-    algorithmView = AlgorithmView(paramsController, runnerController)
+    paramsService = ParamsService(invoker=commandInvoker)
+    paramsController = ParamsController(paramsService=paramsService)
+    paramsView = ParamsView(paramsController=paramsController)
 
     algorithmController = AlgorithmController(
-        algorithmView=algorithmView, algorithmService=algorithmService)
-
-    paramsView = ParamsView(algorithmController=algorithmController)
-    componentView = ComponentView(algorithmController=algorithmController)
-    imageController = ImageController(imageService=imageService)
+        algorithmService=algorithmService)
+    algorithmView = AlgorithmView(
+        paramsView=paramsView, runnerController=runnerController, algorithmController=algorithmController)
+    componentView = ComponentView(algorithmView=algorithmView)
+    imageController = ImageController(
+        imageService=imageService, algorithmRunner=algorithmRunner)
     imageView = ImageView(imageController=imageController)
 
     mainwindow = MainView(algorithmView=algorithmView, componentView=componentView,

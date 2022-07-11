@@ -7,6 +7,7 @@ class CommandThresholding(Command):
     def __init__(self, command: CommandEnum):
         super().__init__(command)
         self.command = self._get_method(command)
+        self.params = dict.fromkeys(['thresh'])
 
     def execute(self, frame) -> any:
         if type(frame) is list:

@@ -7,7 +7,7 @@ from services.dispatchers.frame_dispatcher import FrameDispatcher
 
 class VideoDispatcher(FrameDispatcher):
     def __init__(self, path: str, resolution: Resolution):
-        super.__init__()
+        super().__init__()
         self.__video = cv2.VideoCapture(path)
         self.__video.set(cv2.CAP_PROP_FRAME_WIDTH, resolution.width)
         self.__video.set(cv2.CAP_PROP_FRAME_HEIGHT, resolution.height)

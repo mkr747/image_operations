@@ -14,20 +14,20 @@ class AlgorithmService:
     def get_step(self, uuid):
         return self.__invoker.get_command(uuid)
 
-    def set_params(self, uuid, params: dict):
-        self.__invoker.set_command_params(uuid, params)
-
-    def get_params(self, uuid) -> dict:
-        return self.__invoker.get_command_params(uuid)
-
     def clear(self):
         self.__invoker.clear_commands()
 
     def add(self, cmd: CommandEnum) -> Command:
         implementation = self.__command_factory.get_command(cmd)
-        self.__invoker.add_command(cmd)
+        self.__invoker.add_command(implementation)
 
         return implementation
+
+    def enable_command(self, uuid: UUID):
+        self.__invoker.enable_command(uuid)
+
+    def disable_command(self, uuid: UUID):
+        self.__invoker.disable_command(uuid)
 
     def move(self, uuid: UUID, place: int):
         self.__invoker.move(uuid, place)

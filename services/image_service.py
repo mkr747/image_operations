@@ -1,7 +1,6 @@
 from numpy import zeros
 
 from factories.dispatcher_factory import DispatcherFactory
-from models.resolution import Resolution
 
 
 class ImageService:

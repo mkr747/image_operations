@@ -18,6 +18,8 @@ class CommandFactory:
             CommandEnum.THRESHOLDING: CommandThresholding(CommandEnum.THRESHOLDING),
             CommandEnum.CHANGE_COLOR_SPACE: CommandThresholding(CommandEnum.CHANGE_COLOR_SPACE),
             CommandEnum.AI: CommandAI(CommandEnum.AI),
+            CommandEnum.DRAW_CONTOURS: CommandShapeDetection(
+                CommandEnum.DRAW_CONTOURS)
         }
 
     def get_command(self, command: CommandEnum) -> Command:

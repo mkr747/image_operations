@@ -11,7 +11,8 @@ class Command:
     def __init__(self, cmd: CommandEnum):
         self.uuid = uuid4()
         self.enabled = True
-        self.name = cmd
+        self.name = cmd.value[0]
+        self.params = dict
 
     def execute(self) -> None:
         pass
@@ -26,7 +27,7 @@ class Command:
         pass
 
     def get_params(self) -> dict:
-        pass
+        return self.params
 
     def get_name(self) -> string:
         return self.name

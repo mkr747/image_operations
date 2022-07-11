@@ -10,6 +10,7 @@ class DispatcherFactory:
         pass
 
     def create(self, path: str, resolution: Resolution) -> FrameDispatcher:
+        path = path[0]
         t = path.split('.')[-1]
         if (t == 'jpg' or t is 'png' or t is 'jpeg'):
             return ImageDispatcher(path, resolution)
