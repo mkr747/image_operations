@@ -1,4 +1,5 @@
-
+from app.models.enums.widget_enum import WidgetEnum
+from app.models.params_metadata import ParamsMetadata
 from models.enums.command_enum import CommandEnum
 from services.steps.morphology import Morphology
 from services.steps.shape_detection import ShapeDetection
@@ -10,7 +11,9 @@ class CommandMorphology(Command):
     def __init__(self, command: CommandEnum):
         super().__init__(command)
         self.command = self._get_method(command)
-        self.params = dict.fromkeys(['kernel'])
+        self.params = {
+            'kernel': ParamsMetadata('', WidgetEnum.COMBOBOX, ())
+        }
 
     def execute(self, frame):
         if type(frame) is list:
@@ -18,7 +21,7 @@ class CommandMorphology(Command):
 
         return self.command(frame, self.kernel)
 
-    def set_params(self, params: dict) -> None:
+    def set_params(self, params: dict(str, ParamsMetadata)) -> None:
         self.kernel = params['kernel']
 
     def _get_method(self, name):

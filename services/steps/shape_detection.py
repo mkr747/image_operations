@@ -5,9 +5,9 @@ class ShapeDetection:
     # jest ich 6
     @staticmethod
     def hu_moment(img):
-        _, im = cv2.threshold(im, 128, 255, cv2.THRESH_BINARY)
+        im = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-        moments = cv2.moments(img)
+        moments = cv2.moments(im)
         huMoments = cv2.HuMoments(moments)
 
         return huMoments

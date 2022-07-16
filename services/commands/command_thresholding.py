@@ -1,3 +1,5 @@
+from app.models.enums.widget_enum import WidgetEnum
+from app.models.params_metadata import ParamsMetadata
 from models.enums.command_enum import CommandEnum
 from services.steps.thresholding import Thresholding
 from .command import Command
@@ -7,7 +9,9 @@ class CommandThresholding(Command):
     def __init__(self, command: CommandEnum):
         super().__init__(command)
         self.command = self._get_method(command)
-        self.params = dict.fromkeys(['thresh'])
+        self.params = {
+            'thresh': ParamsMetadata('', WidgetEnum.LISTBOX)
+        }
 
     def execute(self, frame) -> any:
         if type(frame) is list:
@@ -21,7 +25,6 @@ class CommandThresholding(Command):
     def _get_method(self, name):
         switcher = {
             CommandEnum.THRESHOLDING: Thresholding.threshold,
-            CommandEnum.CHANGE_COLOR_SPACE: Thresholding.changeColorSpace,
         }
 
         return switcher.get(name)
