@@ -1,8 +1,8 @@
-from ast import Dict
-from typing import Iterable
+from typing import List
 from uuid import UUID
 
 from numpy import iterable
+from models.parameter_widget import ParameterWidget
 from models.params_metadata import ParamsMetadata
 from .command import Command
 import pickle
@@ -34,7 +34,7 @@ class CommandInvoker:
     def get_command(self, uuid: UUID):
         return next(cmd for cmd in self.__commands if cmd.uuid == uuid)
 
-    def get_command_params(self, uuid: UUID) -> dict:
+    def get_command_params(self, uuid: UUID) -> List[ParameterWidget]:
         id = next(i for i, cmd in enumerate(
             self.__commands) if cmd.uuid == uuid)
         return self.__commands[id].get_params()

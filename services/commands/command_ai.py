@@ -1,3 +1,4 @@
+from typing import Dict
 from models.enums.widget_enum import WidgetEnum
 from models.params_metadata import ParamsMetadata
 from models.enums.command_enum import CommandEnum
@@ -19,7 +20,7 @@ class CommandAI(Command):
     def execute(self, frame):
         return self.command(frame, self.kernel)
 
-    def set_params(self, params: dict[str, ParamsMetadata]) -> None:
+    def set_params(self, params: Dict[str, ParamsMetadata]) -> None:
         path = params['path']
         labels_path = params['labels_path']
         column = params['columns']
@@ -28,7 +29,7 @@ class CommandAI(Command):
 
     def _get_method(self, name):
         switcher = {
-            CommandEnum.AI: self.ai_service.predict
+            CommandEnum.AI_WITH_CONTOURS: self.ai_service.predict
         }
 
         return switcher.get(name)

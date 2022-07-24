@@ -1,13 +1,14 @@
-from app.models.enums.widget_enum import WidgetEnum
+from typing import List
+from models.enums.widget_enum import WidgetEnum
 
 
 class ParamsMetadata:
     value: any
     is_readonly: bool
     type: WidgetEnum
-    possible_values: list(str)
+    possible_values: List[str]
 
-    def __init__(self, value: any, type: WidgetEnum, possible_values=list(str)):
+    def __init__(self, value: any, type: WidgetEnum, possible_values=List[str]):
         self.__value = value
         self.__type = type
         self.__possible_values = possible_values

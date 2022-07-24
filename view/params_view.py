@@ -1,6 +1,9 @@
-from ast import Dict
 import string
+from tkinter import StringVar, ttk
 from uuid import UUID
+from factories.builder_factory import BuilderFactory
+from models.enums.widget_enum import WidgetEnum
+from models.parameter_widget import ParameterWidget
 from controllers.params_controller import ParamsController
 
 from models.params_metadata import ParamsMetadata
@@ -11,10 +14,13 @@ class ParamsView:
     def __init__(self, paramsController: ParamsController):
         self.__params_controller = paramsController
         self.__uuid: UUID
-        self.__name: str
+        self.__name = list()
+        self.__row = list()
         self.__labels = list()
+        self.__value_widgets = list()
         self.__values = list()
-        self.__params = dict
+        self.__params = list()
+        self.__builder_factory = BuilderFactory()
 
     def create(self, window, width=300, height=900):
         self.__frame = gb.create_frame(window, width, height)
@@ -23,7 +29,6 @@ class ParamsView:
 
     def set_params(self, name: string, uuid: UUID, params: dict[str, ParamsMetadata]):
         self.__params = params
-        self.__name = name
         self.__uuid = uuid
         self.__clear()
         for i, key in enumerate(params.keys()):
@@ -35,17 +40,24 @@ class ParamsView:
 
     def feed_params(self, uuid, name):
         self.__clear()
-        self.__params = self.__params_controller.get_params(uuid)
-        print(self.__params.keys())
-        self.__name = name
+        params = self.__params_controller.get_params(uuid)
         self.__uuid = uuid
-        for i, key in enumerate(self.__params.keys()):
-            self.__labels.append(gb.create_label(self.__frame, key, i, 0))
-            #if(self.__params[key].is_readonly):
-            #    self.__values.append(gb.create_label(self.__frame, key, i, 0))
-            #else:
-            #    self.__values.append(gb.create_entry(self.__frame, i, 0))
-            self.__values.append(gb.create_label(self.__frame, key, i, 0))
+        self.__name = name
+        builder = self.__builder_factory.get_widget_builder()
+        label, name_widget, container_name = builder.with_label('Method: ').with_static_value(
+            name).with_widget(WidgetEnum.LABEL).build().create(self.__frame, 0, 0)
+
+        self.__row.append(container_name)
+        self.__labels.append(label)
+        self.__value_widgets.append(name_widget)
+
+        for i, param in enumerate(params):
+            label, value_widgets, container = param.create(
+                self.__frame, i+1, 0)
+            self.__values.append(StringVar())
+            self.__row.append(container)
+            self.__labels.append(label)
+            self.__value_widgets.append(value_widgets)
 
     def confirm_params(self):
         for i, key in enumerate(self.__params):
@@ -56,4 +68,10 @@ class ParamsView:
 
     def __clear(self):
         [label.grid_forget() for label in self.__labels]
-        [value.grid_forget() for value in self.__values]
+        [v.grid_forget() for values in self.__value_widgets for v in values]
+        [row.grid_forget() for row in self.__row]
+
+        self.__labels = list()
+        self.__value_widgets = list()
+        self.__row = list()
+        self.__name = ''

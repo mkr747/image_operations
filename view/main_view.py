@@ -21,6 +21,7 @@ class MainView:
 
         s = ttk.Style()
         s.configure("TFrame", relief=tkinter.RAISED)
+        s.configure("TCombobox", relief=tkinter.RAISED)
 
         frame_right = gf.create_frame(frame=window, width=1200, height=900)
         frame_components = self.__componentView.create(

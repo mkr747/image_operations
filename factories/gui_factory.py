@@ -4,7 +4,7 @@ import tkinter.ttk as ttk
 
 class GuiFactory:
     @staticmethod
-    def create_frame(frame, width, height, anchor='nsew') -> ttk.Frame:
+    def create_frame(frame, width, height) -> ttk.Frame:
         return ttk.Frame(master=frame, width=width, height=height)
 
     @staticmethod
@@ -13,6 +13,15 @@ class GuiFactory:
         label.grid(row=row, column=column)
 
         return label
+
+    @staticmethod
+    def create_combobox(frame: ttk.Frame, values: list, is_readonly: bool, row: int, column: int) -> ttk.Combobox:
+        print('tak')
+        state = 'readonly' if is_readonly else 'normal'
+        combobox = ttk.Combobox(master=frame, values=values, state=state)
+        combobox.grid(row=row, column=column)
+
+        return combobox
 
     @staticmethod
     def create_image_label(frame: ttk.Frame, img: any, row: int, column: int) -> ttk.Label:
@@ -55,3 +64,10 @@ class GuiFactory:
         listbox.grid(row=row, column=column)
 
         return listbox
+
+    @staticmethod
+    def create_scale(frame: ttk.Frame, limit: int, row: int, column: int) -> ttk.Scale:
+        scale = ttk.Scale(frame, from_=0, to=limit, orient=tk.HORIZONTAL)
+        scale.grid(row=row, column=column)
+
+        return scale

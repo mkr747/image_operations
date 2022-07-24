@@ -17,7 +17,7 @@ class CommandFactory:
             CommandEnum.SHAPE_DETECTION: CommandShapeDetection(CommandEnum.SHAPE_DETECTION),
             CommandEnum.THRESHOLDING: CommandThresholding(CommandEnum.THRESHOLDING),
             CommandEnum.CHANGE_COLOR_SPACE: CommandThresholding(CommandEnum.CHANGE_COLOR_SPACE),
-            CommandEnum.AI: CommandAI(CommandEnum.AI),
+            CommandEnum.AI_WITH_CONTOURS: CommandAI(CommandEnum.AI_WITH_CONTOURS),
             CommandEnum.DRAW_CONTOURS: CommandShapeDetection(
                 CommandEnum.DRAW_CONTOURS)
         }

@@ -1,3 +1,4 @@
+from typing import Dict
 from models.enums.widget_enum import WidgetEnum
 from models.params_metadata import ParamsMetadata
 from services.steps.thresholding import Thresholding
@@ -20,8 +21,15 @@ class CommandShapeDetection(Command):
 
         return self.command(frame, self.color_space)
 
-    def set_params(self, params: dict(str, ParamsMetadata)) -> None:
+    def set_params(self, params: Dict[str, ParamsMetadata]) -> None:
         self.color_space = params['color_space']
+
+    def get_params(self):
+        color_space = self.builder_factory.get_widget_builder()
+        color_space.with_label('Color space').with_value('HSL').with_value(
+            'HSV').with_value('RGB').with_value('GRAY').with_widget(WidgetEnum.COMBOBOX)
+
+        return [color_space.build()]
 
     def _get_method(self, name):
         switcher = {
