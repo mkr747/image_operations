@@ -1,4 +1,5 @@
 from typing import Dict, List
+from factories.structural_factory import StructuralFactory
 from models.parameter_widget import ParameterWidget
 from models.enums.widget_enum import WidgetEnum
 from models.params_metadata import ParamsMetadata
@@ -8,12 +9,14 @@ from .command import Command
 
 
 class CommandMorphology(Command):
+    kernel_type_name = 'Kernel type'
+    kernel_n_name = 'Kernel matrix n'
+    kernel_m_name = 'Kernel matrix m'
+
     def __init__(self, command: CommandEnum):
         super().__init__(command)
         self.command = self._get_method(command)
-        self.params = {
-            'kernel': ParamsMetadata('', WidgetEnum.COMBOBOX, ())
-        }
+        self.structural_factory = StructuralFactory()
 
     def execute(self, frame):
         if type(frame) is list:
@@ -22,18 +25,27 @@ class CommandMorphology(Command):
         return self.command(frame, self.kernel)
 
     def set_params(self, params: Dict[str, ParamsMetadata]) -> None:
-        self.kernel = params['kernel']
+        kernel = params[self.kernel_type_name][0]
+        kernel_m = params[self.kernel_m_name][0]
+        kernel_n = params[self.kernel_n_name][0]
+        self.kernel = self.structural_factory.get_kernel(
+            kernel, kernel_n, kernel_m)
 
     def get_params(self) -> List[ParameterWidget]:
         kernel_type = self.builder_factory.get_widget_builder()
-        kernel_type.with_label('Kernel type').with_widget(WidgetEnum.COMBOBOX).with_label('Structure').with_value(
-            'MORPH_RECT').with_value('MORPH_ELIPSE').with_value('MORPH_CROSS').with_value('ONES')
+        kernel_type\
+            .with_label(self.kernel_type_name)\
+            .with_widget(WidgetEnum.COMBOBOX)\
+            .with_value('MORPH_RECT')\
+            .with_value('MORPH_ELIPSE')\
+            .with_value('MORPH_CROSS')\
+            .with_value('ONES')
 
         kernel_m = self.builder_factory.get_widget_builder()
-        kernel_m.with_label('Kernel matrix m').with_widget(WidgetEnum.ENTRY)
+        kernel_m.with_label(self.kernel_m_name).with_widget(WidgetEnum.ENTRY)
 
         kernel_n = self.builder_factory.get_widget_builder()
-        kernel_n.with_label('Kernel matrix n').with_widget(WidgetEnum.ENTRY)
+        kernel_n.with_label(self.kernel_n_name).with_widget(WidgetEnum.ENTRY)
 
         return [kernel_type.build(), kernel_m.build(), kernel_n.build()]
 

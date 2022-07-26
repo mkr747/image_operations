@@ -12,7 +12,7 @@ class Morphology:
 
     @staticmethod
     def opening(frame, kernel):
-        return cv2.morphologyEx(frame, cv2.MORPH_CLOSE, kernel)
+        return cv2.morphologyEx(frame, cv2.MORPH_OPEN, kernel)
 
     @staticmethod
     def closing(frame, kernel):

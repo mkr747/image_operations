@@ -24,6 +24,10 @@ class ParamsView:
 
     def create(self, window, width=300, height=900):
         self.__frame = gb.create_frame(window, width, height)
+        self.__save_button = gb.create_button(
+            self.__frame, 'Save', self.confirm_params, 10, 10)
+        self.__save_button.grid_forget()
+
 
         return self.__frame
 
@@ -40,7 +44,7 @@ class ParamsView:
 
     def feed_params(self, uuid, name):
         self.__clear()
-        params = self.__params_controller.get_params(uuid)
+        self.__params = self.__params_controller.get_params(uuid)
         self.__uuid = uuid
         self.__name = name
         builder = self.__builder_factory.get_widget_builder()
@@ -51,7 +55,7 @@ class ParamsView:
         self.__labels.append(label)
         self.__value_widgets.append(name_widget)
 
-        for i, param in enumerate(params):
+        for i, param in enumerate(self.__params):
             label, value_widgets, container = param.create(
                 self.__frame, i+1, 0)
             self.__values.append(StringVar())
@@ -59,17 +63,28 @@ class ParamsView:
             self.__labels.append(label)
             self.__value_widgets.append(value_widgets)
 
-    def confirm_params(self):
-        for i, key in enumerate(self.__params):
-            if ~self.__params[key].is_readonly:
-                self.__params[key] = self.__values[i].get()
+        self.__save_button.grid(row=10, column=10)
 
-        self.__params_controller.set_params(self.__uuid, self.__params)
+    def confirm_params(self):
+        params = dict()
+        for i, widget in enumerate(self.__value_widgets):
+            values = list()
+            for v in widget:
+                if(isinstance(v, ttk.Label)):
+                    continue
+
+                values.append(v.get())
+
+            params[self.__labels[i].cget("text")] = values
+
+        print(params)
+        self.__params_controller.set_params(self.__uuid, params)
 
     def __clear(self):
         [label.grid_forget() for label in self.__labels]
         [v.grid_forget() for values in self.__value_widgets for v in values]
         [row.grid_forget() for row in self.__row]
+        self.__save_button.grid_forget()
 
         self.__labels = list()
         self.__value_widgets = list()

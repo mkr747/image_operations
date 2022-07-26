@@ -26,8 +26,7 @@ class ImageView:
             self.__frame, 'Play', self.__play, 0, 1)
         self.__stop_button = gb.create_button(
             self.__frame, 'Stop', self.__stop, 0, 2)
-        img = Utils.read_iamge(
-            'D:/Politechnika/Praca magisterska\project/traffic_sign_detection/app/1.png')
+        img = Utils.read_iamge('1.jpg')
         self.__img = img
         self.__label_img = gb.create_image_label(
             self.__frame, img, 1, 1)
@@ -36,7 +35,7 @@ class ImageView:
 
     def __set_image(self, img):
         im = Utils.wrap_image(img)
-        self.__img = im
+        self.__img = img
         self.__label_img.configure(image=self.__img)
         self.__label_img.image = self.__img
         self.__label_img.update()

@@ -12,7 +12,9 @@ class DispatcherFactory:
     def create(self, path: str, resolution: Resolution) -> FrameDispatcher:
         path = path[0]
         t = path.split('.')[-1]
-        if (t == 'jpg' or t is 'png' or t is 'jpeg'):
+        print(t)
+        print('to byl typ')
+        if (t == 'jpg' or t == 'png' or t == 'jpeg'):
             return ImageDispatcher(path, resolution)
 
         return VideoDispatcher(path, resolution)
