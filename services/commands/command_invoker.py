@@ -52,7 +52,7 @@ class CommandInvoker:
 
     def execute(self, frame):
         for cmd in self.__commands:
-            if cmd.enabled:
+            if cmd.is_enabled():
                 frame = cmd.execute(frame)
 
         return frame

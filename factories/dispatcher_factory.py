@@ -10,7 +10,9 @@ class DispatcherFactory:
         pass
 
     def create(self, path: str, resolution: Resolution) -> FrameDispatcher:
-        path = path[0]
+        if(isinstance(path, tuple)):
+            path = path[0]
+
         t = path.split('.')[-1]
         print(t)
         print('to byl typ')

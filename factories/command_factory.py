@@ -9,18 +9,18 @@ from services.commands.command_thresholding import CommandThresholding
 class CommandFactory:
     def __init__(self):
         self.commands = {
-            CommandEnum.ERODE: CommandMorphology(CommandEnum.ERODE),
-            CommandEnum.DILATE: CommandMorphology(CommandEnum.DILATE),
-            CommandEnum.OPENING: CommandMorphology(CommandEnum.OPENING),
-            CommandEnum.CLOSING: CommandMorphology(CommandEnum.CLOSING),
-            CommandEnum.GRADIENT: CommandMorphology(CommandEnum.GRADIENT),
-            CommandEnum.SHAPE_DETECTION: CommandShapeDetection(CommandEnum.SHAPE_DETECTION),
-            CommandEnum.THRESHOLDING: CommandThresholding(CommandEnum.THRESHOLDING),
-            CommandEnum.CHANGE_COLOR_SPACE: CommandThresholding(CommandEnum.CHANGE_COLOR_SPACE),
-            CommandEnum.AI_WITH_CONTOURS: CommandAI(CommandEnum.AI_WITH_CONTOURS),
-            CommandEnum.DRAW_CONTOURS: CommandShapeDetection(
-                CommandEnum.DRAW_CONTOURS)
+            CommandEnum.ERODE: (lambda: CommandMorphology(CommandEnum.ERODE)),
+            CommandEnum.DILATE: (lambda: CommandMorphology(CommandEnum.DILATE)),
+            CommandEnum.OPENING: (lambda: CommandMorphology(CommandEnum.OPENING)),
+            CommandEnum.CLOSING: (lambda: CommandMorphology(CommandEnum.CLOSING)),
+            CommandEnum.GRADIENT: (lambda: CommandMorphology(CommandEnum.GRADIENT)),
+            CommandEnum.SHAPE_DETECTION: (lambda: CommandShapeDetection(CommandEnum.SHAPE_DETECTION)),
+            CommandEnum.THRESHOLDING: (lambda: CommandThresholding(CommandEnum.THRESHOLDING)),
+            CommandEnum.CHANGE_COLOR_SPACE: (lambda: CommandThresholding(CommandEnum.CHANGE_COLOR_SPACE)),
+            CommandEnum.AI_WITH_CONTOURS: (lambda: CommandAI(CommandEnum.AI_WITH_CONTOURS)),
+            CommandEnum.DRAW_CONTOURS: (
+                lambda: CommandShapeDetection(CommandEnum.DRAW_CONTOURS))
         }
 
     def get_command(self, command: CommandEnum) -> Command:
-        return self.commands[command]
+        return self.commands[command]()

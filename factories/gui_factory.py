@@ -52,8 +52,9 @@ class GuiFactory:
         return button
 
     @staticmethod
-    def create_checkbox(frame: any, text: str, row: int, column: int, sticky: str) -> ttk.Checkbutton:
-        checkbutton = ttk.Checkbutton(frame, text=text)
+    def create_checkbox(frame: any, text: str, enabled: bool, row: int, column: int, sticky: str) -> ttk.Checkbutton:
+        checkbutton = ttk.Checkbutton(
+            frame, text=text, command=(lambda: print(enabled.get())), variable=enabled, onvalue=True, offvalue=False)
         checkbutton.grid(row=row, column=column, sticky=sticky)
 
         return checkbutton

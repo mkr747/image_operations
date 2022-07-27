@@ -14,17 +14,17 @@ class AlgorithmRunner:
     def set_frame_dispatcher(self, frame_dispatcher: FrameDispatcher):
         self.__frame_dispatcher = frame_dispatcher
 
-    def run(self):
+    def run(self, is_playing):
         threadLock = threading.Lock()
         if self.__frame_dispatcher is None:
             return
 
-        print(self.__frame_dispatcher.is_opened())
         print('in da runner')
         while self.__frame_dispatcher.is_opened():
-            if not self.__image_service.is_playing():
-                print('continue')
-                continue
+            print(is_playing())
+            if not is_playing():
+                print('break')
+                break
             print('proceeding')
             exists, frame = self.__frame_dispatcher.read()
             if not exists:

@@ -35,7 +35,7 @@ class ImageView:
 
     def __set_image(self, img):
         im = Utils.wrap_image(img)
-        self.__img = img
+        self.__img = im
         self.__label_img.configure(image=self.__img)
         self.__label_img.image = self.__img
         self.__label_img.update()
@@ -51,6 +51,7 @@ class ImageView:
 
     def __load_data(self):
         filetypes = (
+            ('all', '*'),
             ('movies', '*.mp4'),
             ('image jpg', '*.jpg'),
             ('image png', '*.png'),

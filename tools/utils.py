@@ -14,8 +14,8 @@ class Utils:
 
     @staticmethod
     def wrap_image(img):
-        blue, green, red = cv2.split(img)
-        img = cv2.merge((red, green, blue))
+        #blue, green, red = cv2.split(img)
+        #img = cv2.merge((red, green, blue))
         im = Image.fromarray(img)
         imgtk = ImageTk.PhotoImage(image=im)
 

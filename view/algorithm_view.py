@@ -45,7 +45,7 @@ class AlgorithmView:
         cmd = self.__algorithmController.add_step(step)
         row = self.__get_last_item()
         checkbutton = gf.create_checkbox(
-            self.__algorithm_frame, cmd.get_name(), column=0, row=row, sticky='w')
+            self.__algorithm_frame, cmd.get_name(), cmd.enabled, column=0, row=row, sticky='w')
         editButton = self.__create_edit_button(
             self.__algorithm_frame, cmd.uuid, row, cmd.name)
         deleteButton = self.__create_delete_button(
