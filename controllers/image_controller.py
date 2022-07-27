@@ -1,4 +1,3 @@
-import asyncio
 import threading
 from services.algorithm_runner import AlgorithmRunner
 from services.image_service import ImageService

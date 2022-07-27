@@ -20,12 +20,6 @@ class AlgorithmController:
     def move_step(self, uuid: UUID, place: int):
         self.__algorithmService.move(uuid, place)
 
-    def enable_command(self, uuid: UUID):
-        self.__algorithmService.enable_command(uuid)
-
-    def disable_command(self, uuid: UUID):
-        self.__algorithmService.disable_command(uuid)
-
     def load_algorithm(self, path):
         algorithm = self.__algorithmService.load(path)
 

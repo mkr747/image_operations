@@ -10,13 +10,13 @@ class Thresholding:
         return cv2.cvtColor(img, space)
 
     @staticmethod
-    def threshold(img, thresh: Sequence[Threshold]):
+    def threshold(img, thresh: Threshold):
         height = img.shape[0]
         width = img.shape[1]
         mask = np.zeros((height, width, 1))
         masks = []
-        (masks.append(cv2.inRange(img, (elem.t11, elem.t21, elem.t31),
-         (elem.t12, elem.t22, elem.t32))) for elem in thresh)
+        masks.append(cv2.inRange(img, (thresh.t11, thresh.t21, thresh.t31),
+                                 (thresh.t12, thresh.t22, thresh.t32)))
         for m in enumerate(masks):
             mask = cv2.bitwise_or(mask, m)
 

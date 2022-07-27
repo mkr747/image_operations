@@ -26,9 +26,6 @@ class AlgorithmService:
     def enable_command(self, uuid: UUID):
         self.__invoker.enable_command(uuid)
 
-    def disable_command(self, uuid: UUID):
-        self.__invoker.disable_command(uuid)
-
     def move(self, uuid: UUID, place: int):
         self.__invoker.move(uuid, place)
 

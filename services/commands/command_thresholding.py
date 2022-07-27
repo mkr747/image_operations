@@ -1,6 +1,7 @@
 from models.enums.widget_enum import WidgetEnum
 from models.params_metadata import ParamsMetadata
 from models.enums.command_enum import CommandEnum
+from models.threshold import Threshold
 from services.steps.thresholding import Thresholding
 from .command import Command
 
@@ -30,6 +31,8 @@ class CommandThresholding(Command):
         t22 = params[self.thresh_1_name][1]
         t31 = params[self.thresh_1_name][0]
         t32 = params[self.thresh_1_name][1]
+        self.thresh = Threshold(t11=t11, t12=t12, t21=t21,
+                                t22=t22, t31=t31, t32=t32)
 
     def get_params(self) -> dict:
         thresh1 = self.builder_factory.get_widget_builder()

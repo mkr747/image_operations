@@ -1,7 +1,6 @@
 from typing import List
 from uuid import UUID
 
-from numpy import iterable
 from models.parameter_widget import ParameterWidget
 from models.params_metadata import ParamsMetadata
 from .command import Command
@@ -43,12 +42,6 @@ class CommandInvoker:
         id = next(i for i, cmd in enumerate(
             self.__commands) if cmd.uuid == uuid)
         self.__commands.insert(place, self.__commands.pop(id))
-
-    def disable_command(self, uuid: UUID):
-        [cmd.disable() for cmd in self.__commands if cmd.uuid == uuid]
-
-    def enable_command(self, uuid: UUID):
-        [cmd.enable() for cmd in self.__commands if cmd.uuid == uuid]
 
     def execute(self, frame):
         for cmd in self.__commands:
