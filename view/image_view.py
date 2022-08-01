@@ -64,9 +64,4 @@ class ImageView:
             filetypes=filetypes
         )
 
-        showinfo(
-            title='Selected Files',
-            message=filenames
-        )
-
         self.__imageController.load(filenames)

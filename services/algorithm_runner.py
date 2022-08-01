@@ -32,10 +32,10 @@ class AlgorithmRunner:
                 break
 
             if self.__invoker.length() > 0:
-                print('nothing to execute')
+                print('executing')
                 output = self.__invoker.execute(frame)
             else:
-                print('executing')
+                print('nothing to execute')
                 output = frame
             if not type(output) is list:
                 self.__frame_dispatcher.append_output(output)

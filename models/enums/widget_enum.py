@@ -7,3 +7,4 @@ class WidgetEnum(Enum):
     COMBOBOX = 'Combobox',
     SCALE = 'Scale',
     LISTBOX = 'Listbox',
+    LOAD_RESOURCE = 'Load Resource'

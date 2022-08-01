@@ -29,6 +29,7 @@ class ParameterWidget:
             WidgetEnum.SCALE: (lambda: self.__factory.create_scale(master, self.values[column-1], 0, column)),
             WidgetEnum.LABEL: (lambda: self.__factory.create_label(master, self.default, 0, column)),
             WidgetEnum.LISTBOX: (lambda: self.__factory.create_listbox(master, 0, column)),
+            WidgetEnum.LOAD_RESOURCE: (lambda: self.__factory.create_load_resource(master)),
         }.get(type, None)()
 
         return widget
