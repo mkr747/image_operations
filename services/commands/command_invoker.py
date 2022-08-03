@@ -45,6 +45,8 @@ class CommandInvoker:
 
     def execute(self, frame):
         for cmd in self.__commands:
+            if not cmd.is_valid():
+                continue
             if cmd.is_enabled():
                 frame = cmd.execute(frame)
 

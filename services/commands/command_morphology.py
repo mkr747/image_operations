@@ -31,6 +31,9 @@ class CommandMorphology(Command):
         self.kernel = self.structural_factory.get_kernel(
             kernel, kernel_n, kernel_m)
 
+    def is_valid(self) -> bool:
+        return self.kernel is not None
+
     def get_params(self) -> List[ParameterWidget]:
         kernel_type = self.builder_factory.get_widget_builder()
         kernel_type\

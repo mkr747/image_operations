@@ -23,6 +23,9 @@ class Command(ABC):
     def execute(self) -> None:
         pass
 
+    def is_valid(self) -> bool:
+        return False
+
     def disable(self):
         self.enabled.set(False)
 

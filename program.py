@@ -19,7 +19,7 @@ from view.main_view import MainView
 
 def setup():
     commandInvoker = CommandInvoker()
-    resolution = Resolution(height=100, width=100)
+    resolution = Resolution(height=600, width=680)
     algorithmService = AlgorithmService(invoker=commandInvoker)
 
     imageService = ImageService(resolution=resolution)

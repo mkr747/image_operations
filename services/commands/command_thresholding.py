@@ -18,6 +18,9 @@ class CommandThresholding(Command):
             'thresh': ParamsMetadata('', WidgetEnum.LISTBOX)
         }
 
+    def is_valid(self) -> bool:
+        return self.thresh is not None
+
     def execute(self, frame) -> any:
         if type(frame) is list:
             return [self.command(f, self.thresh) for f in frame]

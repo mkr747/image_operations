@@ -1,33 +1,28 @@
 from typing import Dict
-from factories.structural_factory import StructuralFactory
+from models.enums.command_enum import CommandEnum
 from models.enums.widget_enum import WidgetEnum
 from models.params_metadata import ParamsMetadata
-from services.steps.thresholding import Thresholding
-from models.enums.command_enum import CommandEnum
-from services.steps.shape_detection import ShapeDetection
-from .command import Command
+from services.commands.command import Command
 
 
-class CommandShapeDetection(Command):
+class CommandMoments(Command):
     color_space_name = 'Color space from'
 
     def __init__(self, command: CommandEnum):
         super().__init__(command)
         self.command = self._get_method(command)
-        self.structural_factory = StructuralFactory()
 
     def execute(self, frame):
         if type(frame) is list:
-            return [self.command(f, self.color_space) for f in frame]
+            return [self.command(f) for f in frame]
 
-        return self.command(frame, self.color_space)
+        return self.command(frame)
 
     def set_params(self, params: Dict[str, ParamsMetadata]) -> None:
-        self.color_space = self.structural_factory.get_color_space(
-            params[self.color_space_name][0])
+        pass
 
     def is_valid(self) -> bool:
-        return self.color_space is not None
+        return False
 
     def get_params(self):
         color_space = self.builder_factory.get_widget_builder()
@@ -45,7 +40,7 @@ class CommandShapeDetection(Command):
 
     def _get_method(self, name):
         switcher = {
-            CommandEnum.CHANGE_COLOR_SPACE: Thresholding.changeColorSpace,
+            CommandEnum.MOMENTS_WITH_CONTOURS: Thresholding.changeColorSpace,
         }
 
         return switcher.get(name)
